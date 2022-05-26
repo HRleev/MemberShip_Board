@@ -31,15 +31,21 @@ public class MemberController {
         String checkResult=memberService.duplicateCheck(memberId);
         return checkResult;
     }
-    @PostMapping("/login")
-
-    public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
+    @GetMapping("/login")
+    public String login (){
+        return "memberPages/login";
+    }
+    @PostMapping("/login1")
+    public String loginMember(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
         MemberDTO loginMember = memberService.login(memberDTO);
+        System.out.println("MemberController.login");
+        System.out.println("memberDTO = " + memberDTO + ", model = " + model + ", session = " + session);
         if (loginMember != null) {
             model.addAttribute("loginResult", loginMember);
             session.setAttribute("loginMemberId", loginMember.getMemberId());
             session.setAttribute("loginId", loginMember.getMemberId());
-            return "memberPages/list";
+
+            return "boardPages/list";
         }else {
             return "memberPages/login";
         }

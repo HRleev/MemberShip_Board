@@ -14,6 +14,9 @@
         const saveMemberForm =()=>{
             location.href="/member/save"
         }
+        const login=()=>{
+            location.href="/member/login"
+        }
     </script>
 </head>
 <body>

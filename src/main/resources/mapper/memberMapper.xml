@@ -11,6 +11,9 @@
     <select id="duplicateCheck" parameterType="String" resultType="String">
         select memberId from member_table where memberId=#{memberId}
     </select>
+    <select id="login" resultType="member">
+        select * from member_table where memberId=#{memberId} and memberPassword=#{memberPassword}
+    </select>
 </mapper>
 
 

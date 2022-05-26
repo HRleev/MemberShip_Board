@@ -21,6 +21,8 @@ public class MemberRepository {
 
     public MemberDTO login(MemberDTO memberDTO) {
         MemberDTO loginResult = sql.selectOne("Member.login",memberDTO);
+        System.out.println("MemberRepository.login");
+        System.out.println("memberDTO = " + memberDTO);
         return loginResult;
     }
 }

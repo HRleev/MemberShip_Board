@@ -11,7 +11,7 @@
     <title>login.jsp</title>
 </head>
 <body>
-<form action="/member/login" method="post">
+<form action="/member/login1" method="post">
     <input type="text" name="memberId">
     <input type="text" name="memberPassword">
     <input type="submit" value="로그인">

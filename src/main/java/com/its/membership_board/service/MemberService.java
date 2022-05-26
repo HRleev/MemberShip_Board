@@ -45,6 +45,8 @@ public class MemberService {
 
     public MemberDTO login(MemberDTO memberDTO) {
         MemberDTO loginMember= memberRepository.login(memberDTO);
+        System.out.println("MemberService.login");
+        System.out.println("memberDTO = " + memberDTO);
         return loginMember;
     }
 }
