@@ -8,9 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>index.jsp</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <script>
+        const saveMemberForm =()=>{
+            location.href="/member/save"
+        }
+    </script>
 </head>
 <body>
-
+<h2>index.jsp</h2>
+<div class="container">
+    <button class="btn btn-outline-success" onclick="saveMemberForm()">회원가입</button>
+    <button class="btn btn-outline-success" onclick="login()">로그인</button>
+    <button class="btn btn-outline-success" onclick="글목록()">글목록</button>
+</div>
 </body>
 </html>
