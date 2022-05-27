@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MemberRepository {
     @Autowired
@@ -24,5 +26,13 @@ public class MemberRepository {
         System.out.println("MemberRepository.login");
         System.out.println("memberDTO = " + memberDTO);
         return loginResult;
+    }
+
+    public List<MemberDTO> findAll() {
+        return sql.selectList("Member.findAll");
+    }
+
+    public int delete(long m_id) {
+        return sql.delete("Member.delete",m_id);
     }
 }

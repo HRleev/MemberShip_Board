@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class MemberService {
@@ -25,7 +26,6 @@ public class MemberService {
         memberDTO.setMemberFileName(memberFileName);
         String savePath = "D:\\spring_img\\" + memberFileName;
         if (!boardFile.isEmpty()) {
-
 
             boardFile.transferTo(new File(savePath));
         }
@@ -48,6 +48,20 @@ public class MemberService {
         System.out.println("MemberService.login");
         System.out.println("memberDTO = " + memberDTO);
         return loginMember;
+    }
+
+    public List<MemberDTO> findAll() {
+        List<MemberDTO>memberDTOList=memberRepository.findAll();
+        return memberDTOList;
+    }
+
+    public boolean delete(long m_id) {
+        int deleteResult=memberRepository.delete(m_id);
+        if(deleteResult>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

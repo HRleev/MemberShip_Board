@@ -10,36 +10,40 @@
 <html>
 <head>
     <title>list.jsp</title>
+
 </head>
 <body>
+<jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <h2>list.jsp</h2>
-<div id="logout"></div>
+
+<div>
+    <a href="/board/save">글쓰기</a>
+    <a href="/board/findById">조회</a>
+    <c:if test="${sessionScope.loginMemberId eq 'admin'}">
+        <a href ="/member/findAll">관리자페이지(회원목록)</a>
+    </c:if>
+</div>
 <div class="container">
     <table class="table">
         <tr>
-            <th>id</th>
-            <th>memberId</th>
-            <th>memberPassword</th>
-            <th>memberName</th>
-            <th>memberEmail</th>
-            <th>memberMobile</th>
-            <th>memberProfile</th>
+            <th>b_id</th>
+            <th>boardTitle</th>
+            <th>boardContents</th>
+            <th>boardHits</th>
+            <th>boardCreatedDate</th>
+            <th>boardFile</th>
         </tr>
-        <c:forEach items="${memberList}" var="member">
+        <c:forEach items="${boardList}" var="board">
             <tr>
-                <td>${member.id}</td>
-                <td>${member.memberId}</td>
-                <td>${member.memberPassword}</td>
-                <td>${member.memberName}</td>
-                <td>${member.memberEmail}</td>
-                <td>${member.memberMobile}</td>
-                <td>${member.memberProfile}</td>
-
+                <td>${board.b_id}</td>
+                <td><a href="/member/detail?boardTitle=${board.boardTitle}"></a></td>
+                <td>${board.boardContents}</td>
+                <td>${board.boardHits}</td>
+                <td>${board.boardCreatedDate}</td>
+                <td>${board.boardFile}</td>
             </tr>
         </c:forEach>
-    </table>
-    <div id="detail">
-    </div>
+
 </div>
 <div class="container">
     <ul class="pagination justify-content-center">
