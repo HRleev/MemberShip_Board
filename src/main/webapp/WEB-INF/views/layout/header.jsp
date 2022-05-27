@@ -13,7 +13,6 @@
 <%--시멘틱 태그: 태그 이름만으로 역할을 알 수 있다--%>
 <header>
     <a href="/">Home</a> &nbsp;
-    <a href="/board/saveborad">글쓰기</a> &nbsp;
     <a href="/board/findAll">글목록</a>
     <a href="/member/logout">로그아웃</a>
 </header>

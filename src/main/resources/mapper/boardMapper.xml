@@ -4,7 +4,25 @@
 
 
 <mapper namespace="Board">
-
+<insert id="save">
+    insert into board_table (boardTitle,memberId,boardContents,boardFileName)
+            values (#{boardTitle},#{memberId},#{boardContents},#{boardFileName})
+</insert>
+    <select id="findAll" resultType="board">
+    select * from board_table
+    </select>
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="board">
+        select * from board_table order by id desc limit #{start}, #{limit}
+    </select>
+    <select id="count" resultType="int">
+        select count(b_id) from board_table
+    </select>
+    <select id="findById" resultType="board" parameterType="String">
+        select * from board_table where memberId=#{memberId}
+    </select>
+    <update id="updateHits" parameterType="String">
+        update board_table set boardHits=boardHits+1 where memberId=#{memberId}
+    </update>
 </mapper>
 
 

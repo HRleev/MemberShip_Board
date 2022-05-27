@@ -9,9 +9,10 @@ import java.sql.Timestamp;
 public class BoardDTO {
     private long b_id;
     private String boardTitle;
+    private String memberId;
     private String boardContents;
     private int boardHits;
     private Timestamp boardCreatedDate;
     private MultipartFile boardFile;
-    private String FileName;
+    private String boardFileName;
 }

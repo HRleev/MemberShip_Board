@@ -12,12 +12,12 @@
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
-<form action="/board/save" method="post">
-    <input type="text" name="boardTitle" placeholder="글 제목">
-    <input type="text" name="boardWriter" placeholder="작성자">
-    <input type="text" name="boardPassword" placeholder="비밀번호">
-    <textarea class ="form-control" name="boardContents" row="10" cols="30"></textarea>
+<form action="/board/save" method="post" enctype="multipart/form-data">
+    <input type="text" name="boardTitle" placeholder="글 제목"><br>
+    <input type="text" name="memberId" value="${sessionScope.loginMemberId}" placeholder="${sessionScope.loginMemberId}" readonly><br>
+    <textarea class ="form-control" name="boardContents" row="10" cols="30"></textarea><br>
+    <input type="file" name="boardFile" placeholder="첨부파일"><br>
     <input type="submit" value="작성">
-
+</form>
 </body>
 </html>

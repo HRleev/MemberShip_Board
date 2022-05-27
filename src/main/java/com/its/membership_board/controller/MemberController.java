@@ -37,6 +37,7 @@ public class MemberController {
         return "memberPages/login";
     }
     @PostMapping("/login1")
+
     public String loginMember(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
         MemberDTO loginMember = memberService.login(memberDTO);
         System.out.println("MemberController.login");
@@ -46,7 +47,7 @@ public class MemberController {
             session.setAttribute("loginMemberId", loginMember.getMemberId());
             session.setAttribute("loginId", loginMember.getMemberId());
 
-            return "boardPages/list";
+            return "redirect:/board/findAll";
         }else {
             return "memberPages/login";
         }

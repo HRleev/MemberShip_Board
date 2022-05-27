@@ -7,9 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>list.jsp</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 
 </head>
 <body>
@@ -36,14 +38,16 @@
         <c:forEach items="${boardList}" var="board">
             <tr>
                 <td>${board.b_id}</td>
-                <td><a href="/member/detail?boardTitle=${board.boardTitle}"></a></td>
+                <td><a href="/board/detail?memberId=${board.memberId}">${board.boardTitle}</a></td>
                 <td>${board.boardContents}</td>
                 <td>${board.boardHits}</td>
-                <td>${board.boardCreatedDate}</td>
-                <td>${board.boardFile}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
+                                    value="${board.boardCreatedDate}"></fmt:formatDate></td>
+                <td><img src="${pageContext.request.contextPath}/upload/${board.boardFileName}"
+                         alt="" height="100" width="100"></td>
             </tr>
         </c:forEach>
-
+    </table>
 </div>
 <div class="container">
     <ul class="pagination justify-content-center">

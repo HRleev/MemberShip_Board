@@ -20,14 +20,14 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
     public void save(MemberDTO memberDTO) throws IOException {
-        MultipartFile boardFile = memberDTO.getMemberProfile();
-        String memberFileName = boardFile.getOriginalFilename();
+        MultipartFile memberFile = memberDTO.getMemberProfile();
+        String memberFileName = memberFile.getOriginalFilename();
         memberFileName = System.currentTimeMillis() + "-" + memberFileName;
         memberDTO.setMemberFileName(memberFileName);
         String savePath = "D:\\spring_img\\" + memberFileName;
-        if (!boardFile.isEmpty()) {
+        if (!memberFile.isEmpty()) {
 
-            boardFile.transferTo(new File(savePath));
+            memberFile.transferTo(new File(savePath));
         }
         memberRepository.saveFile(memberDTO);
         System.out.println("MemberService.save");

@@ -19,7 +19,7 @@
             location.href="/member/login"
         }
         const list=()=>{
-            location.href="/board/list"
+            location.href="/board/findAll"
         }
 
     </script>

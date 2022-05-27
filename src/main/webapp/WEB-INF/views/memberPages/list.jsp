@@ -38,6 +38,7 @@
             <td>${member.memberMobile}</td>
             <td><img src="${pageContext.request.contextPath}/upload/${member.memberFileName}"
                  alt="" height="100" width="100"></td>
+
             <td><a href="/member/delete?m_id=${member.m_id}">삭제</a></td>
         </tr>
         </c:forEach>
