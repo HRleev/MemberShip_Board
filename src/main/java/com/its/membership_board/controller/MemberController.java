@@ -22,7 +22,7 @@ public class MemberController {
     }
     @PostMapping("/save")
     public String saveFile(@ModelAttribute MemberDTO memberDTO) throws IOException {
-      memberService.save(memberDTO);
+        memberService.save(memberDTO);
         System.out.println("MemberController.saveFile");
         System.out.println("memberDTO = " + memberDTO );
         return "memberPages/login";

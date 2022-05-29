@@ -1,7 +1,6 @@
 package com.its.membership_board.service;
 
 import com.its.membership_board.dto.BoardDTO;
-import com.its.membership_board.dto.MemberDTO;
 import com.its.membership_board.dto.PageDTO;
 import com.its.membership_board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @Service
+
 public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
@@ -23,7 +22,7 @@ public class BoardService {
         String boardFileName = boardFile.getOriginalFilename();
         boardFileName = System.currentTimeMillis() + "-" + boardFileName;
         boardDTO.setBoardFileName(boardFileName);
-        String savePath = "D:\\spring_img\\" + boardFileName;
+        String savePath = "C:\\spring_img\\" + boardFileName;
         System.out.println("BoardService.save");
         System.out.println("boardDTO = " + boardDTO);
         if (!boardFile.isEmpty()) {
@@ -71,7 +70,25 @@ public class BoardService {
         return paging;
     }
 
-    public BoardDTO findById(String memberId) {
-        return boardRepository.findById(memberId);
+    public BoardDTO findById(BoardDTO boardDTO) {
+        return boardRepository.findById(boardDTO);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        System.out.println("BoardService.update");
+        System.out.println("boardDTO = " + boardDTO);
+        boardRepository.update(boardDTO);
+    }
+
+    public void delete(Long b_id) {
+        boardRepository.delete(b_id);
+    }
+
+    public List<BoardDTO> search(String searchType, String q) {
+        Map<String, String> searchParam = new HashMap<>();
+        searchParam.put("type", searchType);
+        searchParam.put("q", q);
+        List<BoardDTO> searchList = boardRepository.search(searchParam);
+        return searchList;
     }
 }

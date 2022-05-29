@@ -18,11 +18,22 @@
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <h2>list.jsp</h2>
 
+<div class="container mt-3">
+    <form action="/board/search" method="get">
+        <select name="searchType">
+            <option value="boardTitle">제목</option>
+            <option value="memberId">작성자</option>
+        </select>
+        <input type="text" name="q" placeholder="검색어입력..">
+        <input type="submit" value="검색">
+    </form>
+</div>
+
 <div>
     <a href="/board/save">글쓰기</a>
     <a href="/board/findById">조회</a>
     <c:if test="${sessionScope.loginMemberId eq 'admin'}">
-        <a href ="/member/findAll">관리자페이지(회원목록)</a>
+        <a href="/member/findAll">관리자페이지(회원목록)</a>
     </c:if>
 </div>
 <div class="container">
@@ -38,7 +49,7 @@
         <c:forEach items="${boardList}" var="board">
             <tr>
                 <td>${board.b_id}</td>
-                <td><a href="/board/detail?memberId=${board.memberId}">${board.boardTitle}</a></td>
+                <td><a href="/board/detail?b_id=${board.b_id}">${board.boardTitle}</a></td>
                 <td>${board.boardContents}</td>
                 <td>${board.boardHits}</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"

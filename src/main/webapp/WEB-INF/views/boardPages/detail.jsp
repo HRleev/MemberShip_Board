@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -23,42 +24,48 @@
     작성일자 : ${board.boardCreatedDate}<br>
     <img src="${pageContext.request.contextPath}/upload/${board.boardFileName}"
          alt="" height="100" width="100">
-<c:if test="${sessionScope.loginId eq board.memberId}">
-    <button class="btn btn-outline-primary"
-            onclick=boardUpdate()>수정
-    </button>
-</c:if>
     <c:if test="${sessionScope.loginId eq board.memberId}">
-    <button class="btn btn-outline-primary"
-            onclick="boardDelete()">삭제
-    </button>
-</c:if>
+        <button class="btn btn-outline-primary"
+                onclick=boardUpdate()>수정
+        </button>
+    </c:if>
+    <c:if test="${sessionScope.loginId eq board.memberId}">
+        <button class="btn btn-outline-primary"
+                onclick="boardDelete()">삭제
+        </button>
+    </c:if>
+    <c:if test="${sessionScope.loginId eq 'admin'}">
+        <button class="btn btn-outline-primary"
+                onclick=boardDelete()>삭제
+        </button>
+    </c:if>
     <button class="btn btn-outline-primary"
             onclick=findAll()>목록
     </button>
 
 
-<%--    <div class="container">--%>
-<%--        <div id="comment-write" class="input-group mb-3 form-floating">--%>
-<%--            <input type="text" id="commentWriter" class="form-control" placeholder="작성자">--%>
-<%--            <input type="text" id="commentContents" class="form-control" placeholder="내용">--%>
-<%--            <button id="comment-write-btn" class="btn btn-primary">댓글작성</button>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div id="comment-list">--%>
-<%--        <table class="table">--%>
-<%--            <tr>댓글번호</tr>--%>
-<%--            <tr>작성자</tr>--%>
-<%--            <tr>내용</tr>--%>
-<%--            <tr>작성시간</tr>--%>
-<%--            <c:forEach items="${commentList}" var="comment">--%>
-<%--                <tr>${comment.id}</tr>--%>
-<%--                <tr>${comment.commentWriter}</tr>--%>
-<%--                <tr>${comment.commentContents}</tr>--%>
-<%--                <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${comment.commentCreatedDate}"></fmt:formatDate></td>--%>
-<%--            </c:forEach>--%>
-<%--        </table>--%>
-<%--    </div>--%>
+        <div class="container">
+            <div id="comment-write" class="input-group mb-3 form-floating">
+                <input type="text" id="memberId" class="form-control" placeholder="작성자">
+                <input type="text" id="commentContents" class="form-control" placeholder="내용">
+                <button id="comment-write-btn" class="btn btn-primary">댓글작성</button>
+            </div>
+        </div>
+        <div id="comment-list">
+            <table class="table">
+                <tr>댓글번호</tr>
+                <tr>작성자</tr>
+                <tr>내용</tr>
+                <tr>작성시간</tr>
+                <c:forEach items="${commentList}" var="comment">
+                    <tr>${comment.c_id}</tr>
+                    <tr>${comment.memberId}</tr>
+                    <tr>${comment.commentContents}</tr>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
+                                        value="${comment.commentCreatedDate}"></fmt:formatDate></td>
+                </c:forEach>
+            </table>
+        </div>
 </div>
 </body>
 <script>
@@ -66,7 +73,7 @@
         location.href = "/board/update?b_id=${board.b_id}";
     }
     const boardDelete =()=>{
-        location.href = "/board/delete?_bid=${board.b_id}";
+        location.href = "/board/delete?b_id=${board.b_id}";
     }
     const findAll =()=> {
         location.href = "/board/findAll";

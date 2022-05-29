@@ -13,7 +13,7 @@ public class BoardRepository {
     @Autowired
     private SqlSessionTemplate sql;
     public int save(BoardDTO boardDTO) {
-         return sql.insert("Board.save",boardDTO);
+        return sql.insert("Board.save",boardDTO);
     }
     public List<BoardDTO> findAll() {
         return sql.selectList("Board.findAll");
@@ -28,8 +28,22 @@ public class BoardRepository {
         return sql.selectOne("Board.count");
     }
 
-    public BoardDTO findById(String memberId) {
-        sql.update("Board.updateHits" ,memberId);
-        return sql.selectOne("Board.findById",memberId);
+    public BoardDTO findById(BoardDTO boardDTO) {
+        sql.update("Board.updateHits" ,boardDTO);
+        return sql.selectOne("Board.findById",boardDTO);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        sql.update("Board.update",boardDTO);
+        System.out.println("BoardRepository.update");
+        System.out.println("boardDTO = " + boardDTO);
+    }
+
+    public void delete(Long b_id) {
+        sql.delete("Board.delete", b_id);
+    }
+
+    public List<BoardDTO> search(Map<String, String> searchParam) {
+        return sql.selectList("Board.search", searchParam);
     }
 }

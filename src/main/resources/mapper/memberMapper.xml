@@ -4,10 +4,10 @@
 
 
 <mapper namespace="Member">
-<insert id="save" parameterType="member">
-    insert into member_table (memberId,memberPassword,memberName,memberEmail,memberMobile,memberFileName)
-                    values (#{memberId},#{memberPassword},#{memberName},#{memberEmail},#{memberMobile},#{memberFileName})
-</insert>
+    <insert id="save" parameterType="member">
+        insert into member_table (memberId,memberPassword,memberName,memberEmail,memberMobile,memberFileName)
+        values (#{memberId},#{memberPassword},#{memberName},#{memberEmail},#{memberMobile},#{memberFileName})
+    </insert>
     <select id="duplicateCheck" parameterType="String" resultType="String">
         select memberId from member_table where memberId=#{memberId}
     </select>

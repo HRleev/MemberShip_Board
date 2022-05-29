@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 @Data
 public class CommentDTO {
     private long c_id;
+    private String memberId;
     private String commentContents;
     private Timestamp commentCreateData;
 

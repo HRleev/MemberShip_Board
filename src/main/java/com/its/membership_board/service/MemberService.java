@@ -24,7 +24,7 @@ public class MemberService {
         String memberFileName = memberFile.getOriginalFilename();
         memberFileName = System.currentTimeMillis() + "-" + memberFileName;
         memberDTO.setMemberFileName(memberFileName);
-        String savePath = "D:\\spring_img\\" + memberFileName;
+        String savePath = "C:\\spring_img\\" + memberFileName;
         if (!memberFile.isEmpty()) {
 
             memberFile.transferTo(new File(savePath));

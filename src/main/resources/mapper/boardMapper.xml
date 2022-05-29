@@ -4,12 +4,12 @@
 
 
 <mapper namespace="Board">
-<insert id="save">
-    insert into board_table (boardTitle,memberId,boardContents,boardFileName)
-            values (#{boardTitle},#{memberId},#{boardContents},#{boardFileName})
-</insert>
+    <insert id="save">
+        insert into board_table (boardTitle,memberId,boardContents,boardFileName)
+        values (#{boardTitle},#{memberId},#{boardContents},#{boardFileName})
+    </insert>
     <select id="findAll" resultType="board">
-    select * from board_table
+        select * from board_table
     </select>
     <select id="pagingList" parameterType="java.util.HashMap" resultType="board">
         select * from board_table order by id desc limit #{start}, #{limit}
@@ -17,12 +17,23 @@
     <select id="count" resultType="int">
         select count(b_id) from board_table
     </select>
-    <select id="findById" resultType="board" parameterType="String">
-        select * from board_table where memberId=#{memberId}
+    <select id="findById" resultType="board" >
+        select * from board_table where b_id=#{b_id}
     </select>
-    <update id="updateHits" parameterType="String">
-        update board_table set boardHits=boardHits+1 where memberId=#{memberId}
+    <update id="updateHits" parameterType="board">
+        update board_table set boardHits=boardHits+1 where b_id=#{b_id}
     </update>
+    <update id="update" parameterType="board">
+        update board_table set boardContents=#{boardContents} where b_id=#{b_id}
+    </update>
+    <delete id="delete" parameterType="Long">
+        delete from board_table where b_id=#{b_id}
+    </delete>
+    <select id="search" parameterType="java.util.HashMap" resultType="board">
+        select * from board_table where ${type}
+                    like concat('%', #{q}, '%') order by b_id desc;
+
+    </select>
 </mapper>
 
 
