@@ -11,7 +11,8 @@
 <html>
 <head>
     <title>detail</title>
-
+    <script src ="/resources/js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
 
@@ -24,17 +25,17 @@
     작성일자 : ${board.boardCreatedDate}<br>
     <img src="${pageContext.request.contextPath}/upload/${board.boardFileName}"
          alt="" height="100" width="100">
-    <c:if test="${sessionScope.loginId eq board.memberId}">
+    <c:if test="${sessionScope.loginMemberId eq board.memberId}">
         <button class="btn btn-outline-primary"
                 onclick=boardUpdate()>수정
         </button>
     </c:if>
-    <c:if test="${sessionScope.loginId eq board.memberId}">
+    <c:if test="${sessionScope.loginMemberId eq board.memberId}">
         <button class="btn btn-outline-primary"
                 onclick="boardDelete()">삭제
         </button>
     </c:if>
-    <c:if test="${sessionScope.loginId eq 'admin'}">
+    <c:if test="${sessionScope.loginMemberId eq 'admin'}">
         <button class="btn btn-outline-primary"
                 onclick=boardDelete()>삭제
         </button>
@@ -46,11 +47,12 @@
 
     <div class="container">
         <div id="comment-write"  class="input-group mb-3 form-floating">
+            <input type="hidden" id="b_id" value="${board.b_id}">
             <input type="text" class="form-control"id="memberId"
                    value="${sessionScope.loginMemberId}"
                    placeholder="${sessionScope.loginMemberId}" readonly>
             <input type="text" id="commentContents" class="form-control" placeholder="내용">
-            <button id="comment-write-btn" class="btn btn-primary">댓글작성</button>
+            <button onclick="comments()" class="btn btn-primary">댓글작성</button>
         </div>
     </div>
     <div id="comment-list">
@@ -60,11 +62,14 @@
             <tr>내용</tr>
             <tr>작성시간</tr>
             <c:forEach items="${commentList}" var="comment">
-                <tr>${comment.c_id}</tr>
-                <tr>${comment.memberId}</tr>
-                <tr>${comment.commentContents}</tr>
-                <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
-                                    value="${comment.commentCreatedDate}"></fmt:formatDate></td>
+                <tr>
+                <td>${comment.c_id}</td>
+                <td>${comment.memberId}</td>
+                <td>${comment.commentContents}</td>
+                <td>${comment.commentCreatedDate}</td>
+<%--                <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"--%>
+<%--                                    value="${comment.commentCreatedDate}"></fmt:formatDate></td>--%>
+                </tr>
             </c:forEach>
         </table>
     </div>
@@ -72,33 +77,34 @@
 </body>
 <script>
 
-    $("#comment-write-btn").click(function () {
+    const  comments =()=>{
         console.log("함수호출")
         const cWriter = document.getElementById("memberId").value;
-        const cContents = $("#commentContents").val();
-        const boardId = '${board.b_id}';
+        const cContents = document.getElementById("commentContents").value;
+        const b_id = '${board.b_id}';
+
         $.ajax({
             type: "post",
             url: "/comment/save",
             data: {
                 "memberId": cWriter,
                 "commentContents": cContents,
-                "b_id": boardId
+                "b_id": b_id,
             },
             dataType: "json",
             success: function (result) {
                 console.log(result);
                 let output = "<table class='table'>";
-                output += "<tr><th>댓글번호</th>";
+                output += "<th>글번호</th>";
                 output += "<th>작성자</th>";
                 output += "<th>내용</th>";
                 output += "<th>작성시간</th></tr>";
                 for (let i in result) {
                     output += "<tr>";
-                    output += "<td>" + result[i].c_id + "</td>";
+                    output += "<td>" + result[i].b_id + "</td>";
                     output += "<td>" + result[i].memberId + "</td>";
                     output += "<td>" + result[i].commentContents + "</td>";
-                    output += "<td>" + result[i].commentCreateData + "</td>";
+                    output += "<td>"+moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -110,7 +116,7 @@
                 alert("어디가 틀렸을까");
             }
         });
-    });
+    }
     const boardUpdate = () => {
         location.href = "/board/update?b_id=${board.b_id}";
     }

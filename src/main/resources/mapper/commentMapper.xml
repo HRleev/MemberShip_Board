@@ -5,8 +5,8 @@
 
 <mapper namespace="Comment">
     <insert id="save" parameterType="comment">
-        insert into comment_table(memberId, commentContents, commentCreatedDate)
-        values (#{memberId}, #{commentContents}, now())
+        insert into comment_table(b_id,memberId, commentContents)
+        values (#{b_id},#{memberId}, #{commentContents})
     </insert>
     <select id="findAll" parameterType="Long" resultType="comment">
         select * from comment_table where b_id=#{b_id} order by c_id desc

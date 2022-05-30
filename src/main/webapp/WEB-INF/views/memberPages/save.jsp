@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
     <title>save.jsp</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <script src ="/resources/js/jquery.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -18,8 +20,6 @@
 <form action="/member/save" method="post" enctype="multipart/form-data">
     <input type="text" onblur="duplicateCheck()" id="memberId" name="memberId" placeholder="계정"><br>
     <div id ="dup-check-result"></div>
-<%--    <input type="text" onblur="regular()" name="memberPassword" id="memberPassword" placeholder="영문 소문자+숫자 5~10글자"><br>--%>
-<%--    <div id="password-check-result"></div>--%>
     <input type="text" name="memberPassword" id="memberPassword" placeholder="추후 정규식 추가"><br>
     <input type="text" name="memberName" placeholder="이름"><br>
     <input type="text" name="memberEmail" placeholder="이메일"><br>

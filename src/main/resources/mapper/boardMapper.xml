@@ -12,7 +12,7 @@
         select * from board_table
     </select>
     <select id="pagingList" parameterType="java.util.HashMap" resultType="board">
-        select * from board_table order by id desc limit #{start}, #{limit}
+        select * from board_table order by b_id desc limit #{start}, #{limit}
     </select>
     <select id="count" resultType="int">
         select count(b_id) from board_table

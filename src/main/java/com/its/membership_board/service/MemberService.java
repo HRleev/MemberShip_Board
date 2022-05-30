@@ -63,5 +63,21 @@ public class MemberService {
             return false;
         }
     }
+
+    public MemberDTO findById(long updateId) {
+        return memberRepository.findById(updateId);
+    }
+
+    public boolean update(MemberDTO memberDTO) {
+        System.out.println("MemberService.update");
+        System.out.println("memberDTO = " + memberDTO);
+        int updateResult = memberRepository.update(memberDTO);
+        if(updateResult>0)
+        {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
 

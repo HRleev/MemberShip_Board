@@ -1,9 +1,11 @@
 package com.its.membership_board.controller;
 
 import com.its.membership_board.dto.BoardDTO;
+import com.its.membership_board.dto.CommentDTO;
 import com.its.membership_board.dto.PageDTO;
 
 import com.its.membership_board.service.BoardService;
+import com.its.membership_board.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +19,15 @@ import java.util.List;
 public class BoardController {
 
     @Autowired
+    private CommentService commentService;
+    @Autowired
     private BoardService boardService;
-    @GetMapping("/findAll")
-    public String findAll(Model model) {
-        List<BoardDTO> boardDTOList = boardService.findAll();
-        model.addAttribute("boardList", boardDTOList);
-        return "/boardPages/list";
-    }
+//    @GetMapping("/findAll")
+//    public String findAll(Model model) {
+//        List<BoardDTO> boardDTOList = boardService.findAll();
+//        model.addAttribute("boardList", boardDTOList);
+//        return "/boardPages/list";
+//    }
     @GetMapping("/save")
     public String save(){
         return "/boardPages/save";
@@ -32,23 +36,24 @@ public class BoardController {
     public String saveForm(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println("cont : "+boardDTO);
         boardService.save(boardDTO);
-        return "redirect:/board/findAll";
+        return "redirect:/board/paging";
     }
     @GetMapping("/paging")
-    //       /board/paging?page=1
-    //       required=false 로 하면 /board/paging 요청도 가능
     public String paging(@RequestParam(value="page", required=false, defaultValue="1")
                          int page, Model model) {
         List<BoardDTO> boardList = boardService.pagingList(page);
         PageDTO paging = boardService.paging(page);
         model.addAttribute("boardList", boardList);
         model.addAttribute("paging", paging);
-        return "boardPages/List";
+        return "boardPages/list";
     }
     @GetMapping("/detail")
-    public String findById(@ModelAttribute BoardDTO boardDTO, Model model){
+    public String findById(@ModelAttribute BoardDTO boardDTO,
+                           @ModelAttribute CommentDTO commentDTO, Model model ){
         BoardDTO board = boardService.findById(boardDTO);
+        List<CommentDTO> commentDTOList = commentService.findAll(commentDTO.getB_id());
         model.addAttribute("board",board);
+        model.addAttribute("commentList",commentDTOList);
         return "boardPages/detail";
     }
     @GetMapping("/update")

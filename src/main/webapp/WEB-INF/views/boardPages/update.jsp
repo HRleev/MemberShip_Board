@@ -16,6 +16,7 @@
 </head>
 <body>
 <h2>update.jsp</h2>
+
 <form action="/board/update" method="post" >
   <input type="hidden" name="b_id" value="${board.b_id}">
   <input type="text" value="${board.boardTitle}" class="form-control" readonly>

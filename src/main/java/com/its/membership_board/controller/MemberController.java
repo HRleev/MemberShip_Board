@@ -38,16 +38,17 @@ public class MemberController {
     }
     @PostMapping("/login1")
 
-    public String loginMember(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
+    public String loginMember(@RequestParam(value="page", required=false, defaultValue="1")
+                                  int page, @ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
         MemberDTO loginMember = memberService.login(memberDTO);
         System.out.println("MemberController.login");
         System.out.println("memberDTO = " + memberDTO + ", model = " + model + ", session = " + session);
         if (loginMember != null) {
             model.addAttribute("loginResult", loginMember);
             session.setAttribute("loginMemberId", loginMember.getMemberId());
-            session.setAttribute("loginId", loginMember.getMemberId());
+            session.setAttribute("loginId", loginMember.getM_id());
 
-            return "redirect:/board/findAll";
+            return "redirect:/board/paging";
         }else {
             return "memberPages/login";
         }
@@ -63,6 +64,7 @@ public class MemberController {
         model.addAttribute("memberList",memberDTOList);
         return "memberPages/list";
     }
+
     @GetMapping("/delete")
     public String delete(@RequestParam("m_id") long m_id,Model model){
         boolean deleteResult =memberService.delete(m_id);
@@ -72,5 +74,23 @@ public class MemberController {
             return "delete-fail";
         }
     }
-
+    @GetMapping("/update-form")
+    public String updateForm(Model model,HttpSession session){
+        Long updateId= (Long) session.getAttribute("loginId");
+        System.out.println("updateId = " +updateId);
+        MemberDTO memberDTO =memberService.findById(updateId);
+        model.addAttribute("updateMember",memberDTO);
+        return "memberPages/myPage";
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+        System.out.println("MemberController.update");
+        boolean updateResult =memberService.update(memberDTO);
+        System.out.println("memberDTO = " + memberDTO);
+        if(updateResult){
+            return "redirect:/member/update-form?m_id=" +memberDTO.getM_id();
+        }else{
+            return "index";
+        }
+    }
 }
