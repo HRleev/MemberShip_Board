@@ -20,7 +20,7 @@
 <form action="/member/save" method="post" enctype="multipart/form-data">
     <input type="text" onblur="duplicateCheck()" id="memberId" name="memberId" placeholder="계정"><br>
     <div id ="dup-check-result"></div>
-    <input type="text" name="memberPassword" id="memberPassword" placeholder="추후 정규식 추가"><br>
+    <input type="text" name="memberPassword" onblur="regular()" id="memberPassword" placeholder="영문 숫자 포함 5자 이상"><br>
     <input type="text" name="memberName" placeholder="이름"><br>
     <input type="text" name="memberEmail" placeholder="이메일"><br>
     <input type="text" name="memberMobile" placeholder="전화번호"><br>
@@ -49,17 +49,17 @@
             }
         });
     }
-    // function regular(){
-    //     const password=document.getElementById("memberPassword").value;
-    //     const checkResult = document.getElementById("password-check-result");
-    //     const exp =/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,8}$/
-    //     if(password.match(exp)){
-    //         checkResult.innerHTML="사용 가능한 비밀번호 입니다";
-    //         checkResult.style.color="green";
-    //     }else{
-    //         checkResult.innerHTML="비밀번호를 다시 입력해주세요";
-    //         checkResult.style.color="red";
-    //     }
-    // }
+    function regular(){
+        const password=document.getElementById("memberPassword").value;
+        const checkResult = document.getElementById("password-check-result");
+        const exp =/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,8}$/
+        if(password.match(exp)){
+            checkResult.innerHTML="사용 가능한 비밀번호 입니다";
+            checkResult.style.color="green";
+        }else{
+            checkResult.innerHTML="비밀번호를 다시 입력해주세요";
+            checkResult.style.color="red";
+        }
+    }
 </script>
 </html>

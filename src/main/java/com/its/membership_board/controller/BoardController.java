@@ -73,7 +73,7 @@ public class BoardController {
     @GetMapping("/delete")
     public String delete(@RequestParam("b_id") Long b_id) {
         boardService.delete(b_id);
-        return "redirect:/board/findAll";
+        return "redirect:/board/paging";
     }
     @GetMapping("/search")
     public String search(@RequestParam("searchType") String searchType,

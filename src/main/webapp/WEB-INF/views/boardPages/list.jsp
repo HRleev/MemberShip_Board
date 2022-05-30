@@ -20,11 +20,11 @@
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <h2>list.jsp</h2>
 
-<div>
-    <a href="/board/save">글쓰기</a>
-    <a href="/board/findById">조회</a>
+<div class="btn-group me-2" role="group" aria-label="Second group">
+    <a href="/board/save" class="btn btn-secondary">글쓰기</a>
+    <a href="/board/findById"class="btn btn-secondary">조회</a>
     <c:if test="${sessionScope.loginMemberId eq 'admin'}">
-        <a href="/member/findAll">관리자페이지(회원목록)</a>
+        <a href="/member/findAll" class="btn btn-secondary">관리자페이지(회원목록)</a>
     </c:if>
 </div>
 <div class="container">
@@ -35,7 +35,7 @@
             <th>boardContents</th>
             <th>boardHits</th>
             <th>boardCreatedDate</th>
-            <th>boardFile</th>
+            <th>boardFileName</th>
         </tr>
         <c:forEach items="${boardList}" var="board">
             <tr>
@@ -45,8 +45,9 @@
                 <td>${board.boardHits}</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss"
                                     value="${board.boardCreatedDate}"></fmt:formatDate></td>
-                <td><img src="${pageContext.request.contextPath}/upload/${board.boardFileName}"
-                         alt="" height="100" width="100"></td>
+                <td>${board.boardFileName}</td>
+<%--                <td><img src="${pageContext.request.contextPath}/upload/${board.boardFileName}"--%>
+<%--                         alt="" height="100" width="100"></td>--%>
             </tr>
         </c:forEach>
     </table>

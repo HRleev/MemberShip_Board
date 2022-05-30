@@ -9,6 +9,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<style>
+    @font-face {
+        font-family: 'EliceDigitalBaeum_Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    body {
+        font-family: 'EliceDigitalBaeum_Bold';
+    }
+</style>
 </head>
 <body>
 
