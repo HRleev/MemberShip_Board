@@ -107,14 +107,17 @@
     <div class="toggle_radio">
         <input type="radio" onclick=location.href="/member/save" class="toggle_option" id="first_toggle" name="toggle_option">
         <input type="radio" onclick=location.href="/member/login" checked class="toggle_option" id="second_toggle" name="toggle_option">
-        <input type="radio" onclick=location.href="/board/paging" class="toggle_option" id="third_toggle"
-               name="toggle_option">
+        <input type="radio" onclick=location.href="/board/paging" class="toggle_option" id="third_toggle" name="toggle_option">
         <label for="first_toggle"><p>회원가입</p></label>
         <label for="second_toggle"><p>로그인</p></label>
         <label for="third_toggle"><p>글목록</p></label>
         <div class="toggle_option_slider">
         </div>
     </div>
+<%--배경을 담거라--%>
+<%--    <div>--%>
+<%--        <img src="..." class="img-fluid" alt="...">--%>
+<%--    </div>--%>
 
     <%--    <button class="btn btn-outline-success"  onclick="saveMemberForm()">회원가입</button>--%>
     <%--    <button class="btn btn-outline-success" onclick="login()">로그인</button>--%>

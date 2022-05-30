@@ -11,43 +11,34 @@
 <head>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <style>
-    @font-face {
-        font-family: 'EliceDigitalBaeum_Bold';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');
-        font-weight: 700;
-        font-style: normal;
-    }
+    /*@font-face {*/
+    /*    font-family: 'EliceDigitalBaeum_Bold';*/
+    /*    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');*/
+    /*    font-weight: 700;*/
+    /*    font-style: normal;*/
+    /*}*/
 
-    body {
-        font-family: 'EliceDigitalBaeum_Bold';
-    }
+    /*body {*/
+    /*    font-family: 'EliceDigitalBaeum_Bold';*/
+    /*}*/
 </style>
 </head>
 <body>
 
 <header>
     <nav class="navbar" style="background-color: #e3f2fd;">
-        <a href="/" class="btn btn-secondary">Home</a> &nbsp;
-        <a href="/board/paging"class="btn btn-secondary" >글목록</a> &nbsp;
+        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="First group">
+        <a href="/" class="btn btn-outline-secondary">Home</a> &nbsp;
+        <a href="/board/paging"class="btn btn-outline-secondary" >글목록</a> &nbsp;
 
         <c:if test="${sessionScope.loginMemberId !=null}">
-            <a href="/member/logout" class="btn btn-secondary" >로그아웃</a>&nbsp;
+            <a href="/member/logout" class="btn btn-outline-secondary" >로그아웃</a>&nbsp;
         </c:if>
 
         <c:if test="${sessionScope.loginMemberId !=null}">
-            <a href="/member/update-form" class="btn btn-secondary" >마이페이지</a>&nbsp;
+            <a href="/member/update-form"class="btn btn-outline-secondary">마이페이지</a>&nbsp;
         </c:if>
-
-        <div class="container mt-3">
-            <form action="/board/search" method="get">
-                <select name="searchType">
-                    <option value="boardTitle">제목</option>
-                    <option value="memberId">작성자</option>
-                </select>
-                <input type="text" name="q" placeholder="검색어입력..">
-                <input type="submit" value="검색">
-            </form>
-        </div>
     </nav>
 
 </header>

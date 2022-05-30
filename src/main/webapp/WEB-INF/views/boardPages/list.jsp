@@ -13,19 +13,22 @@
     <title>list.jsp</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <style>
-
+.container{
+    margin-bottom: 20px;
+}
 </style>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <h2>list.jsp</h2>
-
+<div class="container">
 <div class="btn-group me-2" role="group" aria-label="Second group">
     <a href="/board/save" class="btn btn-secondary">글쓰기</a>
-    <a href="/board/findById"class="btn btn-secondary">조회</a>
+<%--    <a href="/board/paging"class="btn btn-secondary">조회</a>--%>
     <c:if test="${sessionScope.loginMemberId eq 'admin'}">
         <a href="/member/findAll" class="btn btn-secondary">관리자페이지(회원목록)</a>
     </c:if>
+</div>
 </div>
 <div class="container">
     <table class="table table-striped">
@@ -51,6 +54,16 @@
             </tr>
         </c:forEach>
     </table>
+</div>
+<div class="container mt-3">
+    <form action="/board/search" method="get">
+        <select name="searchType">
+            <option value="boardTitle">제목</option>
+            <option value="memberId">작성자</option>
+        </select>
+        <input type="text" name="q" placeholder="검색어입력..">
+        <input type="submit" value="검색">
+    </form>
 </div>
 <div class="container">
     <ul class="pagination justify-content-center">
