@@ -60,10 +60,12 @@
     </div>
     <div id="comment-list">
         <table class="table table-striped">
-            <tr>댓글번호</tr>
-            <tr>작성자</tr>
-            <tr>내용</tr>
-            <tr>작성시간</tr>
+            <tr>
+                <th>댓글번호</th>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>작성시간</th>
+            </tr>
             <c:forEach items="${commentList}" var="comment">
                 <tr>
                 <td>${comment.c_id}</td>
@@ -97,14 +99,14 @@
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                let output = "<table class='table'>";
-                output += "<th>글번호</th>";
+                let output = "<table class='table table-striped'>";
+                output += "<th>댓글번호</th>";
                 output += "<th>작성자</th>";
                 output += "<th>내용</th>";
                 output += "<th>작성시간</th></tr>";
                 for (let i in result) {
                     output += "<tr>";
-                    output += "<td>" + result[i].b_id + "</td>";
+                    output += "<td>" + result[i].c_id + "</td>";
                     output += "<td>" + result[i].memberId + "</td>";
                     output += "<td>" + result[i].commentContents + "</td>";
                     output += "<td>"+ moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
@@ -112,7 +114,6 @@
                 }
                 output += "</table>";
                 document.getElementById('comment-list').innerHTML = output;
-                document.getElementById('memberId').value = '';
                 document.getElementById('commentContents').value = '';
             },
             error: function () {
