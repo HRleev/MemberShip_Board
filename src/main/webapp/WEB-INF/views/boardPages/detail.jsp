@@ -12,19 +12,22 @@
 <head>
     <title>detail</title>
     <script src ="/resources/js/jquery.js"></script>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
 
-<div class="container">
-    글번호 : ${board.b_id}<br>
-    작성자 : ${board.memberId}<br>
-    제목 : ${board.boardTitle}<br>
-    내용 : ${board.boardContents}<br>
-    조회수 : ${board.boardHits}<br>
-    작성일자 : ${board.boardCreatedDate}<br>
-    <img src="${pageContext.request.contextPath}/upload/${board.boardFileName}"
-         alt="" height="100" width="100">
+<div class="container" >
+    <table class="table table-striped">
+        <th>글번호 : ${board.b_id}</th>
+        <th>작성자 : ${board.memberId}</th>
+        <th> 제목 : ${board.boardTitle}</th>
+        <th>내용 : ${board.boardContents}</th>
+        <th> 조회수 : ${board.boardHits}</th>
+        <th>작성일자 : ${board.boardCreatedDate}</th>
+        <th> <img src="${pageContext.request.contextPath}/upload/${board.boardFileName}"
+         alt="" height="100" width="100"></th>
+    </table>
     <c:if test="${sessionScope.loginMemberId eq board.memberId}">
         <button class="btn btn-outline-primary"
                 onclick=boardUpdate()>수정
@@ -56,7 +59,7 @@
         </div>
     </div>
     <div id="comment-list">
-        <table class="table">
+        <table class="table table-striped">
             <tr>댓글번호</tr>
             <tr>작성자</tr>
             <tr>내용</tr>
@@ -104,7 +107,7 @@
                     output += "<td>" + result[i].b_id + "</td>";
                     output += "<td>" + result[i].memberId + "</td>";
                     output += "<td>" + result[i].commentContents + "</td>";
-                    output += "<td>"+moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
+                    output += "<td>"+ moment(result[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
